@@ -15,21 +15,38 @@ public class Part04Transform {
 
 	// TODO Capitalize the user username, firstname and lastname
 	Mono<User> capitalizeOne(Mono<User> mono) {
-		return null;
+
+		Mono<User> userModificado = Mono.just(mono).flatMap(user -> user).map( user -> {
+
+			User newUser = new User( user.getUsername().toUpperCase(), user.getFirstname().toUpperCase(), user.getLastname().toUpperCase());
+			return newUser;
+		});
+
+		return userModificado;
 	}
 
 //========================================================================================
 
 	// TODO Capitalize the users username, firstName and lastName
 	Flux<User> capitalizeMany(Flux<User> flux) {
-		return null;
+
+		Flux<User> userModificado = Flux.just(flux).flatMap(user -> user).map( user -> {
+
+			User newUser = new User( user.getUsername().toUpperCase(), user.getFirstname().toUpperCase(), user.getLastname().toUpperCase());
+			return newUser;
+		});
+
+		return userModificado;
 	}
 
 //========================================================================================
 
 	// TODO Capitalize the users username, firstName and lastName using #asyncCapitalizeUser
 	Flux<User> asyncCapitalizeMany(Flux<User> flux) {
-		return null;
+		Flux<User> userModificado = flux.flatMap(user -> asyncCapitalizeUser(user));
+
+		return userModificado;
+
 	}
 
 	Mono<User> asyncCapitalizeUser(User u) {
